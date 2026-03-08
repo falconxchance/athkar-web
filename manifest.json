@@ -1,0 +1,10 @@
+{
+  "name": "Athkar Starter",
+  "short_name": "Athkar",
+  "start_url": "./index.php",
+  "display": "standalone",
+  "background_color": "#f6f3ec",
+  "theme_color": "#0b3b2e",
+  "description": "Simple athkar starter app.",
+  "icons": []
+}

@@ -1,0 +1,59 @@
+{
+  "section": "after-prayer",
+  "items": [
+    {
+      "id": "after-prayer-001",
+      "title": "Seek forgiveness after salah",
+      "arabic": "أَسْتَغْفِرُ اللَّهَ",
+      "transliteration": "Astaghfirullah.",
+      "translation": "I seek Allah's forgiveness.",
+      "source": "After salah. Bin Baz fatwa 13709; Dorar hadith KD9v9dxV.",
+      "count": 3
+    },
+    {
+      "id": "after-prayer-002",
+      "title": "Peace belongs to Allah",
+      "arabic": "اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",
+      "transliteration": "Allahumma anta as-salam, wa minka as-salam, tabarakta ya dhal-jalali wal-ikram.",
+      "translation": "O Allah, You are Peace, and from You comes peace. Blessed are You, O Possessor of majesty and honor.",
+      "source": "After salah. Bin Baz fatwa 13709; Dorar hadith KD9v9dxV.",
+      "count": 1
+    },
+    {
+      "id": "after-prayer-003",
+      "title": "Tasbih after prayer",
+      "arabic": "سُبْحَانَ اللَّهِ",
+      "transliteration": "Subhan Allah.",
+      "translation": "Glory be to Allah.",
+      "source": "After salah tasbih. IslamQA 228520.",
+      "count": 33
+    },
+    {
+      "id": "after-prayer-004",
+      "title": "Tahmid after prayer",
+      "arabic": "الْحَمْدُ لِلَّهِ",
+      "transliteration": "Al-hamdu lillah.",
+      "translation": "Praise be to Allah.",
+      "source": "After salah tasbih. IslamQA 228520.",
+      "count": 33
+    },
+    {
+      "id": "after-prayer-005",
+      "title": "Takbir after prayer",
+      "arabic": "اللَّهُ أَكْبَرُ",
+      "transliteration": "Allahu Akbar.",
+      "translation": "Allah is the Greatest.",
+      "source": "After salah tasbih. IslamQA 228520.",
+      "count": 33
+    },
+    {
+      "id": "after-prayer-006",
+      "title": "Completion of the hundred",
+      "arabic": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",
+      "transliteration": "La ilaha illa Allah wahdahu la sharika lah, lahul-mulk wa lahul-hamd, wa huwa 'ala kulli shay'in qadir.",
+      "translation": "There is no god but Allah alone, with no partner or associate. His is the dominion, to Him be praise, and He has power over all things.",
+      "source": "After salah tasbih. IslamQA 228520 and 131850.",
+      "count": 1
+    }
+  ]
+}

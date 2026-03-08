@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /user/
+Sitemap: https://athkar.shehryar.pk/sitemap.xml

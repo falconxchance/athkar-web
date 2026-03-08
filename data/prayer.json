@@ -1,0 +1,41 @@
+{
+  "section": "prayer",
+  "items": [
+    {
+      "id": "prayer-001",
+      "title": "After wudu",
+      "arabic": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ",
+      "transliteration": "Ashhadu an la ilaha illa Allah wahdahu la sharika lah, wa ashhadu anna Muhammadan 'abduhu wa rasuluh.",
+      "translation": "I bear witness that there is no god except Allah alone, with no partner or associate, and I bear witness that Muhammad is His slave and Messenger.",
+      "source": "After wudu. IslamQA 125773; Dorar hadith JGruHdsq.",
+      "count": 1
+    },
+    {
+      "id": "prayer-002",
+      "title": "Entering the mosque",
+      "arabic": "اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ",
+      "transliteration": "Allahumma iftah li abwaba rahmatika.",
+      "translation": "O Allah, open to me the gates of Your mercy.",
+      "source": "Entering the mosque. IslamQA 272194; Bin Baz audio 886.",
+      "count": 1
+    },
+    {
+      "id": "prayer-003",
+      "title": "Leaving the mosque",
+      "arabic": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ",
+      "transliteration": "Allahumma inni as'aluka min fadlika.",
+      "translation": "O Allah, I ask You of Your bounty.",
+      "source": "Leaving the mosque. IslamQA 272194; Bin Baz audio 886.",
+      "count": 1
+    },
+    {
+      "id": "prayer-004",
+      "title": "After the adhan",
+      "arabic": "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ",
+      "transliteration": "Allahumma Rabba hadhihi-d-da'watit-tammah, was-salatil-qa'imah, ati Muhammadan al-wasilata wal-fadilah, wab'ath-hu maqaman mahmudan alladhi wa'adtah.",
+      "translation": "O Allah, Lord of this perfect call and the established prayer, grant Muhammad the wasilah and virtue, and raise him to the praised station that You promised him.",
+      "source": "After the adhan. Bin Baz audio 886 quoting Sahih al-Bukhari.",
+      "count": 1
+    }
+  ]
+}

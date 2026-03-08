@@ -1,0 +1,2 @@
+<?php
+require __DIR__ . '/sitemap.php';

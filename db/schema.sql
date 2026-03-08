@@ -1,0 +1,156 @@
+CREATE TABLE IF NOT EXISTS athkar_sections (
+  slug VARCHAR(50) NOT NULL PRIMARY KEY,
+  label VARCHAR(100) NOT NULL,
+  description VARCHAR(255) DEFAULT NULL,
+  icon VARCHAR(16) DEFAULT NULL,
+  display_order INT UNSIGNED NOT NULL DEFAULT 1,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS athkar_items (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  item_key VARCHAR(120) NOT NULL,
+  section_slug VARCHAR(50) NOT NULL,
+  title VARCHAR(255) NOT NULL,
+  arabic TEXT NOT NULL,
+  transliteration TEXT DEFAULT NULL,
+  translation TEXT DEFAULT NULL,
+  source TEXT DEFAULT NULL,
+  repetition_count INT UNSIGNED NOT NULL DEFAULT 1,
+  display_order INT UNSIGNED NOT NULL DEFAULT 1,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_item_key (item_key),
+  KEY idx_section_order (section_slug, display_order),
+  CONSTRAINT fk_athkar_items_section
+    FOREIGN KEY (section_slug) REFERENCES athkar_sections (slug)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Optional multi-language tables (AR/EN and beyond)
+CREATE TABLE IF NOT EXISTS app_languages (
+  code VARCHAR(8) NOT NULL PRIMARY KEY,
+  label VARCHAR(64) NOT NULL,
+  native_label VARCHAR(64) NOT NULL,
+  dir ENUM('ltr','rtl') NOT NULL DEFAULT 'ltr',
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  display_order INT UNSIGNED NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS athkar_sections_i18n (
+  section_slug VARCHAR(50) NOT NULL,
+  lang VARCHAR(8) NOT NULL,
+  label VARCHAR(100) NOT NULL,
+  description VARCHAR(255) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (section_slug, lang),
+  CONSTRAINT fk_sections_i18n_section FOREIGN KEY (section_slug)
+    REFERENCES athkar_sections (slug)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS athkar_items_i18n (
+  item_id INT UNSIGNED NOT NULL,
+  lang VARCHAR(8) NOT NULL,
+  title VARCHAR(255) DEFAULT NULL,
+  transliteration TEXT DEFAULT NULL,
+  translation TEXT DEFAULT NULL,
+  source TEXT DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (item_id, lang),
+  CONSTRAINT fk_items_i18n_item FOREIGN KEY (item_id)
+    REFERENCES athkar_items (id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS ui_strings (
+  string_key VARCHAR(100) NOT NULL,
+  lang VARCHAR(8) NOT NULL,
+  value TEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (string_key, lang)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS athkar_pages (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  slug VARCHAR(120) NOT NULL,
+  display_order INT UNSIGNED NOT NULL DEFAULT 1,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  show_on_home TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uniq_slug (slug),
+  KEY idx_pages_home (show_on_home, is_active, display_order)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS athkar_pages_i18n (
+  page_id INT UNSIGNED NOT NULL,
+  lang VARCHAR(8) NOT NULL,
+  title VARCHAR(255) DEFAULT NULL,
+  content MEDIUMTEXT DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (page_id, lang),
+  CONSTRAINT fk_pages_i18n_page FOREIGN KEY (page_id)
+    REFERENCES athkar_pages (id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS site_content_i18n (
+  content_key VARCHAR(100) NOT NULL,
+  lang VARCHAR(8) NOT NULL,
+  value MEDIUMTEXT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (content_key, lang)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+CREATE TABLE IF NOT EXISTS athkar_reports (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  item_id INT UNSIGNED NOT NULL,
+  item_key VARCHAR(120) NOT NULL,
+  section_slug VARCHAR(50) NOT NULL,
+  lang VARCHAR(8) NOT NULL DEFAULT 'en',
+  page_context ENUM('app','seo_item') NOT NULL DEFAULT 'app',
+  issue_type VARCHAR(40) NOT NULL,
+  reporter_name VARCHAR(120) DEFAULT NULL,
+  reporter_email VARCHAR(190) DEFAULT NULL,
+  message TEXT NOT NULL,
+  source_url VARCHAR(500) DEFAULT NULL,
+  ip_address VARCHAR(64) DEFAULT NULL,
+  user_agent VARCHAR(255) DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY idx_reports_created (created_at),
+  KEY idx_reports_item (item_id, created_at),
+  KEY idx_reports_issue (issue_type, created_at),
+  CONSTRAINT fk_athkar_reports_item FOREIGN KEY (item_id)
+    REFERENCES athkar_items (id)
+    ON UPDATE CASCADE
+    ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS admin_login_attempts (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(80) NOT NULL DEFAULT '',
+  ip_address VARCHAR(45) NOT NULL,
+  user_agent VARCHAR(190) DEFAULT NULL,
+  was_success TINYINT(1) NOT NULL DEFAULT 0,
+  attempted_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  KEY idx_admin_login_ip_time (ip_address, attempted_at),
+  KEY idx_admin_login_user_time (username, attempted_at),
+  KEY idx_admin_login_success_time (was_success, attempted_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

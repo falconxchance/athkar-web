@@ -1,0 +1,26 @@
+AddType application/x-httpd-php .php .xml
+AddHandler application/x-httpd-php .php .xml
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+ErrorDocument 404 /404.php
+
+
+RewriteRule ^index\.html$ index.php [R=301,L,QSA,NC]
+RewriteRule ^section\.html$ section.php [R=301,L,QSA,NC]
+
+RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA,NC]
+RewriteRule ^user/?$ /user/login.php [R=302,L,QSA,NC]
+
+RewriteRule ^app/([a-zA-Z]{2,8})/?$ index.php?lang=$1 [L,QSA,NC]
+RewriteRule ^app/([a-zA-Z]{2,8})/section/([^/]+)/?$ section.php?lang=$1&type=$2 [L,QSA,NC]
+RewriteRule ^([a-zA-Z]{2,8})/?$ /app/$1/ [R=301,L,QSA,NC]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^([a-zA-Z]{2,8})/section/([^/]+)/?$ seo-section.php?lang=$1&slug=$2 [L,QSA,NC]
+RewriteRule ^([a-zA-Z]{2,8})/item/([^/]+)/?$ seo-item.php?lang=$1&item=$2 [L,QSA,NC]
+RewriteRule ^([a-zA-Z]{2,8})/page/([^/]+)/?$ seo-page.php?lang=$1&page=$2 [L,QSA,NC]
+RewriteRule ^([a-zA-Z]{2,8})/sitemap/?$ seo-sitemap.php?lang=$1 [L,QSA,NC]
